@@ -1,8 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>你好</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>欢迎来到此网站</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background-color: #f9f7f2;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        /* 背景装饰元素 */
+        .bg-element {
+            position: fixed;
+            z-index: -1;
+            opacity: 0.15;
+        }
+        
+        .circle-1 {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e8d8b6, #c9a88e);
+            top: 10%;
+            left: 5%;
+        }
+        
+        .circle-2 {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #a3b6c9, #7a8ca3);
+            bottom: 15%;
+            right: 8%;
+        }
+        
+        .line-art {
+            width: 2px;
+            height: 400px;
+            background: linear-gradient(to bottom, transparent, #b8a28a, transparent);
+            left: 20%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        /* 主容器 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        
+        /* 标题区域 */
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 0 1rem;
+        }
+        
+        .main-title {
+            font-size: 3.5rem;
+            font-weight: 300;
+            letter-spacing: 8px;
+            margin-bottom: 1rem;
+            color: #5c4b37;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .main-title::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #b8a28a, transparent);
+            bottom: -15px;
+            left: 0;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #7a6a55;
+            margin-top: 2rem;
+            letter-spacing: 2px;
+        }
+        
+        /* 内容区域 */
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            width: 100%;
+        }
+        
+        .art-card {
+            flex: 1;
+            min-width: 300px;
+            max-width: 350px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(232, 216, 182, 0.2);
+            text-align: center;
+        }
+        
+        .art-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-icon {
+            font-size: 2.5rem;
+            color: #b8a28a;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #5c4b37;
+            font-weight: 400;
+        }
+        
+        .card-text {
+            color: #7a6a55;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+        
+        /* 常来常来区域 */
+        .invitation {
+            text-align: center;
+            margin: 3rem 0;
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .invitation-text {
+            font-size: 1.8rem;
+            color: #5c4b37;
+            font-weight: 300;
+            letter-spacing: 3px;
+            line-height: 1.8;
+            position: relative;
+            padding: 0 1rem;
+        }
+        
+        .invitation-text::before,
+        .invitation-text::after {
+            content: "※";
+            color: #b8a28a;
+            margin: 0 1rem;
+            font-size: 1.5rem;
+        }
+        
+        /* 底部 */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #7a6a55;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            width: 100%;
+            border-top: 1px solid rgba(184, 162, 138, 0.2);
+            margin-top: auto;
+        }
+        
+        .footer-links {
+            margin-top: 1rem;
+        }
+        
+        .footer-links a {
+            color: #b8a28a;
+            text-decoration: none;
+            margin: 0 0.5rem;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #7a6a55;
+            text-decoration: underline;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+                letter-spacing: 5px;
+            }
+            
+            .content {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .art-card {
+                max-width: 100%;
+            }
+            
+            .invitation-text {
+                font-size: 1.5rem;
+            }
+            
+            .circle-1, .circle-2 {
+                display: none;
+            }
+        }
+        
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.2s; opacity: 0; }
+        .delay-2 { animation-delay: 0.4s; opacity: 0; }
+        .delay-3 { animation-delay: 0.6s; opacity: 0; }
+        .delay-4 { animation-delay: 0.8s; opacity: 0; }
+    </style>
 </head>
 <body>
-    <h1>你好！</h1>
+    <!-- 背景装饰元素 -->
+    <div class="bg-element circle-1"></div>
+    <div class="bg-element circle-2"></div>
+    <div class="bg-element line-art"></div>
+    
+    <div class="container">
+        <!-- 标题区域 -->
+        <header class="header fade-in">
+            <h1 class="main-title">欢迎来到此网站</h1>
+            <p class="subtitle">简约 · 雅致 · 艺术 · 留白</p>
+        </header>
+        
+        <!-- 内容区域 -->
+        <div class="content">
+            <div class="art-card fade-in delay-1">
+                <div class="card-icon">
+                    <i class="fas fa-palette"></i>
+                </div>
+                <h3 class="card-title">视觉艺术</h3>
+                <p class="card-text">简约的设计语言，源自东方美学的留白意境。在这里，每一处空白都是思考的空间，每一处细节都经过精心雕琢。</p>
+            </div>
+            
+            <div class="art-card fade-in delay-2">
+                <div class="card-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h3 class="card-title">自然美学</h3>
+                <p class="card-text">色彩灵感源于自然，大地色系与柔和色调交织，营造宁静平和的视觉体验，让心灵在浏览中得到片刻休憩。</p>
+            </div>
+            
+            <div class="art-card fade-in delay-3">
+                <div class="card-icon">
+                    <i class="fas fa-feather-alt"></i>
+                </div>
+                <h3 class="card-title">轻盈体验</h3>
+                <p class="card-text">流畅的交互与轻盈的动效，让浏览成为一种享受。每一次点击都如羽毛般轻柔，带来愉悦的用户体验。</p>
+            </div>
+        </div>
+        
+        <!-- 常来常来区域 -->
+        <section class="invitation fade-in delay-4">
+            <p class="invitation-text">此处有清茶，有雅乐，有静思的空间，期待您的再次来访，常来常来</p>
+        </section>
+        
+        <!-- 底部 -->
+        <footer class="footer fade-in delay-4">
+            <p>© 2023 雅致空间 · 简约艺术网站</p>
+            <div class="footer-links">
+                <a href="#"><i class="fas fa-heart"></i> 关注我们</a>
+                <a href="#"><i class="fas fa-envelope"></i> 联系</a>
+                <a href="#"><i class="fas fa-share-alt"></i> 分享</a>
+            </div>
+        </footer>
+    </div>
+    
+    <script>
+        // 添加滚动动画效果
+        document.addEventListener('DOMContentLoaded', function() {
+            // 背景元素轻微移动效果
+            const bgElements = document.querySelectorAll('.bg-element');
+            
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                
+                bgElements.forEach(function(el, index) {
+                    const speed = 0.5;
+                    const yPos = -(scrolled * speed);
+                    
+                    if (index === 0) {
+                        el.style.transform = `translateY(${yPos}px) rotate(${scrolled * 0.05}deg)`;
+                    } else if (index === 1) {
+                        el.style.transform = `translateY(${yPos * 0.7}px) rotate(${-scrolled * 0.03}deg)`;
+                    }
+                });
+            });
+            
+            // 卡片悬停效果增强
+            const cards = document.querySelectorAll('.art-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    const icon = this.querySelector('.card-icon');
+                    icon.style.transform = 'scale(1.2)';
+                    icon.style.transition = 'transform 0.3s ease';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    const icon = this.querySelector('.card-icon');
+                    icon.style.transform = 'scale(1)';
+                });
+            });
+            
+            // 文字逐字显示效果（可选）
+            const title = document.querySelector('.main-title');
+            const originalText = title.textContent;
+            title.textContent = '';
+            
+            let i = 0;
+            function typeWriter() {
+                if (i < originalText.length) {
+                    title.textContent += originalText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                }
+            }
+            
+            // 页面加载完成后开始打字效果
+            setTimeout(typeWriter, 500);
+        });
+    </script>
 </body>
 </html>
